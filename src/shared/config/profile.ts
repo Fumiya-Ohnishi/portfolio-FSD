@@ -1,7 +1,7 @@
 import type { Profile } from '@/shared/types'
 
 export const profile: Profile = {
-  displayName: '大西 文哉',
+  displayName: '大西 史弥',
   nameEn: 'Fumiya Ohnishi',
   title: 'Frontend Engineer / Web Creator',
   subtitle: '業種に合わせた世界観を、コードで形にする',
