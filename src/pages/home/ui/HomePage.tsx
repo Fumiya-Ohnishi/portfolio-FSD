@@ -5,7 +5,7 @@ import { Hero } from '@/widgets/hero'
 import { FeaturedWorks } from '@/widgets/featured-works'
 import { StrengthsSection } from '@/widgets/strengths-section'
 import { ProfileSummary } from '@/widgets/profile-summary'
-import { Section, SectionHeader } from '@/shared/ui/Section'
+import { Section } from '@/shared/ui/Section'
 import { socialLinks } from '@/shared/config/socialLinks'
 import { useMeta } from '@/shared/lib/useMeta'
 

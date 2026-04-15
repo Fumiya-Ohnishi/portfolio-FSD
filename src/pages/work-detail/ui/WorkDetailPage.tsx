@@ -1,9 +1,8 @@
 import { useEffect } from 'react'
-import { useParams, Link, Navigate } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { ArrowLeft, ExternalLink } from 'lucide-react'
 import { getWorkBySlug, getRelatedWorks } from '@/shared/config/works'
 import { WorkCard } from '@/entities/work'
-import { Tag } from '@/shared/ui/Tag'
 import { Section } from '@/shared/ui/Section'
 import { useMeta } from '@/shared/lib/useMeta'
 

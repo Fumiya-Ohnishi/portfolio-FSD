@@ -8,10 +8,8 @@ const HeroCanvas = lazy(() =>
 
 export const Hero = () => {
   const [loaded, setLoaded] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    setIsMobile(window.innerWidth < 768)
     const timer = setTimeout(() => setLoaded(true), 100)
     return () => clearTimeout(timer)
   }, [])
