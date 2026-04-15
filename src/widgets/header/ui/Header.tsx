@@ -14,13 +14,19 @@ export const Header = () => {
   const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
 
+  // ホーム以外のページ、またはスクロール済みの場合はライトスタイルを適用
+  const isLight = scrolled || location.pathname !== '/'
+
   useEffect(() => {
+    // ページ遷移時にスクロール位置をリセット判定
+    setScrolled(window.scrollY > 40)
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 40)
     }
     window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [location.pathname])
 
   useEffect(() => {
     setIsOpen(false)
@@ -44,7 +50,7 @@ export const Header = () => {
       className={`
         fixed top-0 left-0 right-0 z-50
         transition-all duration-300
-        ${scrolled
+        ${isLight
           ? 'bg-white/90 backdrop-blur-md border-b border-neutral-200/60 shadow-sm py-3'
           : 'bg-transparent py-5'
         }
@@ -61,13 +67,13 @@ export const Header = () => {
             className={`
               w-8 h-8 rounded-lg flex items-center justify-center
               transition-all duration-300
-              ${scrolled ? 'bg-primary-600' : 'bg-white/20 border border-white/30'}
+              ${isLight ? 'bg-primary-600' : 'bg-white/20 border border-white/30'}
             `}
           >
             <span
               className={`
                 font-display font-bold text-base leading-none
-                ${scrolled ? 'text-white' : 'text-white'}
+                text-white
               `}
             >
               F
@@ -77,7 +83,7 @@ export const Header = () => {
             className={`
               font-display font-semibold text-lg tracking-tight
               transition-colors duration-300
-              ${scrolled ? 'text-neutral-900' : 'text-white'}
+              ${isLight ? 'text-neutral-900' : 'text-white'}
             `}
           >
             Fumiya Ohnishi
@@ -94,10 +100,10 @@ export const Header = () => {
                 px-4 py-2 rounded-lg text-sm font-medium
                 transition-all duration-200
                 ${isActive(item.href)
-                  ? scrolled
+                  ? isLight
                     ? 'bg-primary-50 text-primary-700'
                     : 'bg-white/20 text-white'
-                  : scrolled
+                  : isLight
                   ? 'text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900'
                   : 'text-white/80 hover:text-white hover:bg-white/10'
                 }
@@ -114,7 +120,7 @@ export const Header = () => {
           className={`
             md:hidden p-2 rounded-lg
             transition-colors duration-200
-            ${scrolled
+            ${isLight
               ? 'text-neutral-700 hover:bg-neutral-100'
               : 'text-white hover:bg-white/10'
             }
