@@ -1,0 +1,144 @@
+import { useEffect } from 'react'
+import { ExternalLink } from 'lucide-react'
+import { socialLinks } from '@/shared/config/socialLinks'
+import { Section, SectionHeader } from '@/shared/ui/Section'
+import { useMeta } from '@/shared/lib/useMeta'
+
+const PlatformIcon = ({ platform, size = 32 }: { platform: string; size?: number }) => {
+  const s = size
+  switch (platform) {
+    case 'instagram':
+      return (
+        <svg viewBox="0 0 24 24" fill="currentColor" width={s} height={s}>
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+        </svg>
+      )
+    case 'threads':
+      return (
+        <svg viewBox="0 0 24 24" fill="currentColor" width={s} height={s}>
+          <path d="M12.186 24h-.007c-3.581-.024-6.334-1.205-8.184-3.509C2.35 18.44 1.5 15.586 1.472 12.01v-.017c.03-3.579.879-6.43 2.525-8.482C5.845 1.205 8.6.024 12.18 0h.014c2.746.02 5.043.725 6.826 2.098 1.677 1.29 2.858 3.13 3.509 5.467l-2.04.569c-1.104-3.96-3.898-5.984-8.304-6.015-2.91.022-5.11.936-6.54 2.717C4.307 6.504 3.616 8.914 3.589 12c.027 3.086.718 5.496 2.057 7.164 1.43 1.783 3.631 2.698 6.54 2.717 2.623-.02 4.358-.631 5.8-2.045 1.647-1.613 1.618-3.593 1.09-4.798-.31-.71-.873-1.3-1.634-1.75-.192 1.352-.622 2.446-1.284 3.272-.886 1.102-2.14 1.704-3.73 1.79-1.202.065-2.361-.218-3.259-.801-1.063-.689-1.685-1.74-1.752-2.964-.065-1.19.408-2.285 1.33-3.082.88-.76 2.119-1.207 3.583-1.291a13.853 13.853 0 0 1 3.02.142c-.126-.742-.375-1.332-.75-1.757-.513-.583-1.289-.878-2.309-.88h-.01c-.795 0-1.498.199-2.095.591-.426.278-.79.665-1.08 1.154l-1.741-1.121c.44-.72 1.005-1.33 1.68-1.81.95-.65 2.074-.984 3.35-.987h.016c1.595.005 2.908.47 3.9 1.382 1.133 1.045 1.734 2.58 1.79 4.565.423.214.822.456 1.19.724 1.267.929 2.054 2.183 2.396 3.724.476 2.138.12 4.886-2.044 7.002-1.742 1.707-3.895 2.55-6.578 2.567z" />
+        </svg>
+      )
+    case 'x':
+      return (
+        <svg viewBox="0 0 24 24" fill="currentColor" width={s} height={s}>
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.746l7.73-8.835L1.254 2.25H8.08l4.259 5.627L18.244 2.25zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        </svg>
+      )
+    case 'github':
+      return (
+        <svg viewBox="0 0 24 24" fill="currentColor" width={s} height={s}>
+          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+        </svg>
+      )
+    default:
+      return <ExternalLink width={s} height={s} />
+  }
+}
+
+export const ContactPage = () => {
+  useMeta({
+    title: 'Contact',
+    description:
+      'Fumiya Ohnishi へのお問い合わせはSNSからどうぞ。Instagram・Threads・X・GitHubなど各種リンクを掲載しています。',
+  })
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
+  return (
+    <main className="pt-20">
+      {/* ヘッダー */}
+      <div className="bg-gradient-to-br from-neutral-950 via-[#0d1f3c] to-[#1a1040] text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
+          <p className="text-primary-400 text-sm font-semibold tracking-widest uppercase mb-4">
+            Contact
+          </p>
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4">
+            お問い合わせ
+          </h1>
+          <p className="text-neutral-300/80 text-base md:text-lg max-w-xl leading-relaxed">
+            ご依頼・ご相談はSNSのDMからお気軽にどうぞ。
+            <br />
+            まずはお気軽にメッセージをお送りください。
+          </p>
+        </div>
+      </div>
+
+      {/* SNSカード */}
+      <Section>
+        <div className="max-w-3xl mx-auto">
+          <SectionHeader
+            eyebrow="Social Media"
+            title="SNS・連絡先"
+            description="以下のSNSからDMにてご連絡ください。制作のご相談・お見積もりはお気軽にどうぞ。"
+            align="center"
+          />
+
+          <div className="grid grid-cols-1 gap-4">
+            {socialLinks.map((link) => (
+              <a
+                key={link.platform}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-6 p-6 bg-white rounded-2xl border border-neutral-200/80 shadow-card hover:shadow-card-hover transition-all duration-300 hover:-translate-y-0.5"
+              >
+                {/* アイコン */}
+                <div
+                  className={`
+                    flex-shrink-0 w-16 h-16 rounded-2xl
+                    bg-gradient-to-br ${link.bgColor}
+                    flex items-center justify-center text-white
+                    transition-transform duration-300 group-hover:scale-110
+                  `}
+                >
+                  <PlatformIcon platform={link.platform} size={28} />
+                </div>
+
+                {/* テキスト */}
+                <div className="flex-1 min-w-0">
+                  <div className="font-semibold text-lg text-neutral-900 group-hover:text-primary-700 transition-colors mb-0.5">
+                    {link.label}
+                  </div>
+                  <div className="text-sm text-neutral-500 line-clamp-1 mb-2">
+                    {link.description}
+                  </div>
+                  <div className="text-xs text-neutral-400 font-mono truncate">
+                    {link.url}
+                  </div>
+                </div>
+
+                {/* 矢印 */}
+                <div className="flex-shrink-0 p-2 rounded-xl bg-neutral-50 group-hover:bg-primary-50 transition-colors">
+                  <ExternalLink
+                    size={18}
+                    className="text-neutral-400 group-hover:text-primary-600 transition-colors"
+                  />
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      {/* メッセージ */}
+      <Section className="bg-neutral-50" tight>
+        <div className="max-w-2xl mx-auto text-center">
+          <div className="bg-white rounded-2xl border border-neutral-200 p-8 md:p-12 shadow-card">
+            <div className="text-4xl mb-4">💬</div>
+            <h2 className="font-display text-2xl font-bold text-neutral-900 mb-3">
+              まずはお気軽に
+            </h2>
+            <p className="text-neutral-500 text-sm leading-relaxed">
+              制作費用や納期のご相談から、「こんなサイトが作れる？」という漠然としたご相談まで、
+              <br className="hidden sm:block" />
+              お気軽にメッセージをお送りください。
+            </p>
+          </div>
+        </div>
+      </Section>
+    </main>
+  )
+}
